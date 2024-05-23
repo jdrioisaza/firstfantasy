@@ -24,17 +24,35 @@ public abstract class Personaje {
     }
 
     public void atacar(Personaje objetivo) {
-
+        int nuevaSalud=objetivo.getSalud()-armaEquipada.getDañoPorGolpe();
+        objetivo.setSalud(nuevaSalud);
     }
 
     public void usarHabilidad(int idxHabilidad, Personaje objetivo) {
+        Habilidad skill = buscarHabilidad(idxHabilidad);
+        if (skill!=null){
+            //Codigo para la logica de la habilidad aqui
+            gastoEnergiaHabilidad(skill.getCostoEnergia());
+        }
+    }
+    private Habilidad buscarHabilidad(int idHabilidad) {
+        for (Habilidad skill : habilidades) {
+            if (skill.getId() == idHabilidad) {
+                return skill;
+            }
+        }
+        return null;
+    }
 
+
+    public  void gastoEnergiaHabilidad(int gasto){
+        energia-=gasto;
     }
 
     public void cambiarArma(int idArama) {
         Arma weapon = buscarArma(idArama);
-        if(weapon!=null){
-            armaEquipada=weapon;
+        if (weapon != null) {
+            armaEquipada = weapon;
         }
     }
 
