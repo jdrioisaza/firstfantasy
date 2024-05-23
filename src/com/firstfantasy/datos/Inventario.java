@@ -11,6 +11,8 @@ public class Inventario {
         this.armas = armas;
         this.pociones = pociones;
     }
+
+    
     
     public void addArma(Arma arma){
         armas.add(arma);

@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Heroe extends Personaje{
     
-    public Heroe(Arma armaEquipada, Raza raza, Clase clase, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones) {
-        super(armaEquipada, raza, clase, habilidades, armas, pociones);
+    public Heroe(Arma armaEquipada, Raza raza, Clase clase, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones, int salud, int energia) {
+        super(armaEquipada, raza, clase, habilidades, armas, pociones, salud, energia);
     }
     
 }
