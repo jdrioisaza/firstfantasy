@@ -1,9 +1,10 @@
 package com.firstfantasy.datos;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Personaje {
-    
+
     private Inventario inventario;
     private Arma armaEquipada;
     private Raza raza;
@@ -21,17 +22,58 @@ public abstract class Personaje {
         this.salud = 100;
         this.energia = 100;
     }
-    
-    public void atacar(Personaje objetivo){
-        
+
+    public void atacar(Personaje objetivo) {
+
     }
-    
-    public void usarHabilidad(int idxHabilidad, Personaje objetivo){
-        
+
+    public void usarHabilidad(int idxHabilidad, Personaje objetivo) {
+
     }
-    
-    public void usarPocion(int idxPocion){
-        
+
+    public void cambiarArma(int idArama) {
+        Arma weapon = buscarArma(idArama);
+        if(weapon!=null){
+            armaEquipada=weapon;
+        }
+    }
+
+
+    private Arma buscarArma(int idArma) {
+        ArrayList<Arma> weapons = inventario.getArmas();
+        for (Arma a : weapons) {
+            if (a.getId() == idArma) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    public void usarPocion(int idxPocion) {
+        Pocion pos = buscarPocion(idxPocion);
+        if (pos != null) {
+            if (Objects.equals(pos.getEfecto(), "CURACION")) {
+                recuperSalud();
+            }
+        }
+    }
+
+    private void recuperSalud() {
+        if (salud >= 50) {
+            salud = 100;
+        } else {
+            salud += 50;
+        }
+    }
+
+    public Pocion buscarPocion(int idxPocion) {
+        ArrayList<Pocion> pos = inventario.getPociones();
+        for (Pocion po : pos) {
+            if (po.getId() == idxPocion) {
+                return po;
+            }
+        }
+        return null;
     }
 
     /**
@@ -131,7 +173,6 @@ public abstract class Personaje {
     public void setHabilidades(ArrayList<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
-    
-    
-    
+
+
 }
