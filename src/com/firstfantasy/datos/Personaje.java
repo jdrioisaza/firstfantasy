@@ -1,196 +1,82 @@
 package com.firstfantasy.datos;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public abstract class Personaje {
 
-    private Inventario inventario;
-    private Arma armaEquipada;
+    private int identificador;
+    private String nombre;
+    private int[] estadisticas;
     private Raza raza;
     private Clase clase;
-    private int salud;
-    private int energia;
+    private Arma armaEquipada;
     private ArrayList<Habilidad> habilidades;
+    private Inventario inventario;
 
-    public Personaje(Arma armaEquipada, Raza raza, Clase clase, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones, int salud, int energia) {
+    public Personaje(int identificador, String nombre, int vida, int energia, int atributoAtaque, int atributoAtaqueEspecial, int atributoDefensa, int atributoDefensaEspecial, Raza raza, Clase clase, Arma armaEquipada, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.estadisticas = new int[]{vida, energia, atributoAtaque, atributoAtaqueEspecial, atributoDefensa, atributoDefensaEspecial};
+        this.raza = raza;
+        this.clase = clase;
+        this.armaEquipada = armaEquipada;
+        this.habilidades = habilidades;
         this.inventario = new Inventario(armas, pociones);
-        this.armaEquipada = armaEquipada;
-        this.raza = raza;
-        this.clase = clase;
-        this.habilidades = habilidades;
-        this.salud = 100;
-        this.energia = 100;
     }
 
-    public void atacar(Personaje objetivo) {
-        int nuevaSalud=objetivo.getSalud()-armaEquipada.getDañoPorGolpe();
-        objetivo.setSalud(nuevaSalud);
+    public void atacarFisicamente(Personaje objetivo) {
+        
+        objetivo.recibirDañoFisico((int)(estadisticas[2] * raza.getMultiplicadorDaño() * clase.getMultiplicadorDaño() + armaEquipada.getValorModificadorAtaque() + clase.calcularBonificacionTipoArmaPreferida(armaEquipada)[0]));
+        
     }
-
-    public void usarHabilidad(int idxHabilidad, Personaje objetivo) {
-        Habilidad skill = buscarHabilidad(idxHabilidad);
-        if (skill!=null){
-            //Codigo para la logica de la habilidad aqui
-            gastoEnergiaHabilidad(skill.getCostoEnergia());
-        }
-    }
-    private Habilidad buscarHabilidad(int idHabilidad) {
-        for (Habilidad skill : habilidades) {
-            if (skill.getId() == idHabilidad) {
-                return skill;
-            }
-        }
-        return null;
-    }
-
-
-    public  void gastoEnergiaHabilidad(int gasto){
-        energia-=gasto;
-    }
-
-    public void cambiarArma(int idArama) {
-        Arma weapon = buscarArma(idArama);
-        if (weapon != null) {
-            armaEquipada = weapon;
-        }
-    }
-
-
-    private Arma buscarArma(int idArma) {
-        ArrayList<Arma> weapons = inventario.getArmas();
-        for (Arma a : weapons) {
-            if (a.getId() == idArma) {
-                return a;
-            }
-        }
-        return null;
-    }
-
-    public void usarPocion(int idxPocion) {
-        Pocion pos = buscarPocion(idxPocion);
-        if (pos != null) {
-            if (Objects.equals(pos.getEfecto(), "CURACION")) {
-                recuperSalud();
-            }
-        }
-    }
-
-    private void recuperSalud() {
-        if (salud >= 50) {
-            salud = 100;
+    
+    public void recibirDañoFisico(int daño) {
+        
+        if (estadisticas[0] + estadisticas[4] - daño <= 0) {
+            
+            estadisticas[0] = 0;
+            
         } else {
-            salud += 50;
+            
+            estadisticas[0] = estadisticas[0] + estadisticas[4] - daño;
+            
         }
+        
+    }
+    
+    public void usarPocion(int identificador) {
+        
+        int indice = buscarPocion(identificador);
+        ArrayList<Pocion> pociones = inventario.getPociones();
+        
+        estadisticas[0] += pociones.get(indice).getValorModificadorAtaque();
+        estadisticas[1] += pociones.get(indice).getValorModificadorEnergia();
+        estadisticas[2] += pociones.get(indice).getValorModificadorAtaque();
+        estadisticas[3] += pociones.get(indice).getValorModificadorAtaqueEspecial();
+        estadisticas[4] += pociones.get(indice).getValorModificadorDefensa();
+        estadisticas[5] += pociones.get(indice).getValorModificadorDefensaEspecial();
+        
+        pociones.remove(indice);
+        inventario.setPociones(pociones);
+        
     }
 
-    public Pocion buscarPocion(int idxPocion) {
-        ArrayList<Pocion> pos = inventario.getPociones();
-        for (Pocion po : pos) {
-            if (po.getId() == idxPocion) {
-                return po;
+    public int buscarPocion(int identificador) {
+        
+        ArrayList<Pocion> pociones = inventario.getPociones();
+        
+        for (int i = 0; i < pociones.size(); i++) {
+            
+            if (pociones.get(i).getIdentificador() == identificador) {
+                
+                return i;
+                
             }
+            
         }
-        return null;
+        
+        return -1;
+        
     }
-
-    /**
-     * @return the inventario
-     */
-    public Inventario getInventario() {
-        return inventario;
-    }
-
-    /**
-     * @param inventario the inventario to set
-     */
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
-    }
-
-    /**
-     * @return the armaEquipada
-     */
-    public Arma getArmaEquipada() {
-        return armaEquipada;
-    }
-
-    /**
-     * @param armaEquipada the armaEquipada to set
-     */
-    public void setArmaEquipada(Arma armaEquipada) {
-        this.armaEquipada = armaEquipada;
-    }
-
-    /**
-     * @return the raza
-     */
-    public Raza getRaza() {
-        return raza;
-    }
-
-    /**
-     * @param raza the raza to set
-     */
-    public void setRaza(Raza raza) {
-        this.raza = raza;
-    }
-
-    /**
-     * @return the clase
-     */
-    public Clase getClase() {
-        return clase;
-    }
-
-    /**
-     * @param clase the clase to set
-     */
-    public void setClase(Clase clase) {
-        this.clase = clase;
-    }
-
-    /**
-     * @return the salud
-     */
-    public int getSalud() {
-        return salud;
-    }
-
-    /**
-     * @param salud the salud to set
-     */
-    public void setSalud(int salud) {
-        this.salud = salud;
-    }
-
-    /**
-     * @return the energia
-     */
-    public int getEnergia() {
-        return energia;
-    }
-
-    /**
-     * @param energia the energia to set
-     */
-    public void setEnergia(int energia) {
-        this.energia = energia;
-    }
-
-    /**
-     * @return the habilidades
-     */
-    public ArrayList<Habilidad> getHabilidades() {
-        return habilidades;
-    }
-
-    /**
-     * @param habilidades the habilidades to set
-     */
-    public void setHabilidades(ArrayList<Habilidad> habilidades) {
-        this.habilidades = habilidades;
-    }
-
 
 }

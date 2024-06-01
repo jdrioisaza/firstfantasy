@@ -12,27 +12,32 @@ public class Inventario {
         this.pociones = pociones;
     }
 
-    
-    
-    public void addArma(Arma arma){
-        armas.add(arma);
-    }
-    
-    public void addPocion(Pocion pocion){
-        pociones.add(pocion);
-    }
-
-    /**
-     * @return the armas
-     */
     public ArrayList<Arma> getArmas() {
         return armas;
     }
 
-    /**
-     * @return the pociones
-     */
+    public void setArmas(ArrayList<Arma> armas) {
+        this.armas = armas;
+    }
+    
+    public void addArma(Arma arma) {
+        
+        armas.add(arma);
+        
+    }
+
     public ArrayList<Pocion> getPociones() {
         return pociones;
     }
+
+    public void setPociones(ArrayList<Pocion> pociones) {
+        this.pociones = pociones;
+    }
+    
+    public void addPocion(Pocion pocion) {
+        
+        pociones.add(pocion);
+        
+    }
+    
 }

@@ -1,55 +1,44 @@
 package com.firstfantasy.datos;
 
 public abstract class Objeto {
-    private int id;
+    
+    private int identificador;
     private String nombre;
+    private String tipo;
 
-    public Objeto(int id, String nombre) {
-        this.id = id;
+    public Objeto(int identificador, String nombre, String tipo) {
+        this.identificador = identificador;
         this.nombre = nombre;
-    }
-    
-    public void obtener(){
-        
-    }
-    
-    
-    public void usar(){
-        
+        this.tipo = tipo;
     }
 
-    @Override
-    public String toString() {
-        return "Objeto(" + "id=" + id + ", nombre=" + nombre + ')';
-    }
-    
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    public int getIdentificador() {
+        return identificador;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
 
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Objeto{" + "identificador=" + identificador + ", nombre=" + nombre + ", tipo=" + tipo + '}';
+    }
+    
 }

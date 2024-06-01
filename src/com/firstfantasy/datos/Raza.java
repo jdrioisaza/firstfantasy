@@ -1,83 +1,111 @@
 package com.firstfantasy.datos;
 
-import java.util.ArrayList;
-
 public class Raza {
-    private int id;
-    private String nombre;
-    private ArrayList<String> ventajas;
-    private ArrayList<String> desventajas;
-
-    public Raza(int id, String nombre, ArrayList<String> ventajas, ArrayList<String> desventajas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.ventajas = ventajas;
-        this.desventajas = desventajas;
-    }
-
-    @Override
-    public String toString() {
-        return "Raza(" + "id=" + id + ", nombre=" + nombre + ", ventajas=" + ventajas + ", desventajas=" + desventajas + ')';
-    }
-
     
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    private int identificador;
+    private String nombre;
+    private float[] estadisticas; 
+
+    public Raza(int identificador, String nombre, float multiplicadorDaño, float multiplicadorDañoEspecial, float multiplicadorDefensa, float multiplicadorDefensaEspecial/*, float MultiplicadorVampirismo, float MultiplicadorLetalidad*/) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        //this.estadisticas = new float[]{MultiplicadorDaño, MultiplicadorDañoEspecial, MultiplicadorDefensa, MultiplicadorDefensaEspecial, MultiplicadorVampirismo, MultiplicadorLetalidad};
+        this.estadisticas = new float[]{multiplicadorDaño, multiplicadorDañoEspecial, multiplicadorDefensa, multiplicadorDefensaEspecial};
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
+    public int getIdentificador() {
+        return identificador;
     }
 
-    /**
-     * @return the nombre
-     */
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    /**
-     * @return the ventajas
-     */
-    public ArrayList<String> getVentajas() {
-        return ventajas;
-    }
-
-    /**
-     * @param ventajas the ventajas to set
-     */
-    public void setVentajas(ArrayList<String> ventajas) {
-        this.ventajas = ventajas;
-    }
-
-    /**
-     * @return the desventajas
-     */
-    public ArrayList<String> getDesventajas() {
-        return desventajas;
-    }
-
-    /**
-     * @param desventajas the desventajas to set
-     */
-    public void setDesventajas(ArrayList<String> desventajas) {
-        this.desventajas = desventajas;
+    
+    public float getMultiplicadorDaño() {
+        
+        return estadisticas[0];
+        
     }
     
+    public void setMultiplicadorDaño(float multiplicadorDaño) {
+        
+        this.estadisticas[0] = multiplicadorDaño;
+        
+    }
     
+    public float getMultiplicadorDañoEspecial() {
+        
+        return estadisticas[1];
+        
+    }
     
+    public void setMultiplicadorDañoEspecial(float multiplicadorDañoEspecial) {
+        
+        this.estadisticas[1] = multiplicadorDañoEspecial;
+        
+    }
+    
+    public float getMultiplicadorDefensa() {
+        
+        return estadisticas[2];
+        
+    }
+    
+    public void setMultiplicadorDefensa(float multiplicadorDefensa) {
+        
+        this.estadisticas[2] = multiplicadorDefensa;
+        
+    }
+    
+    public float getMultiplicadorDefensaEspecial() {
+        
+        return estadisticas[3];
+        
+    }
+    
+    public void setMultiplicadorDefensaEspecial(float multiplicadorDefensaEspecial) {
+        
+        this.estadisticas[3] = multiplicadorDefensaEspecial;
+        
+    }
+    
+    /*
+    public float getMultiplicadorVampirismo() {
+        
+        return estadisticas[4];
+        
+    }
+    
+    public void setMultiplicadorVampirismo(float MultiplicadorVampirismo) {
+        
+        this.estadisticas[4] = MultiplicadorVampirismo;
+        
+    }
+    
+    public float getMultiplicadorLetalidad() {
+        
+        return estadisticas[5];
+        
+    }
+    
+    public void setMultiplicadorLetalidad(float MultiplicadorLetalidad) {
+        
+        this.estadisticas[5] = MultiplicadorLetalidad;
+        
+    }
+    */
+
+    @Override
+    public String toString() {
+        return "Raza{" + "identificador=" + identificador + ", nombre=" + nombre + ", multiplicadorAtaque=" + estadisticas[0] + ", multiplicadorAtaqueEspecial" + estadisticas[1] + ", multiplicadorDefensa" + estadisticas[2] + "multiplicadorDefensaEspecial" + estadisticas[3] + '}';
+    }
     
 }

@@ -1,49 +1,51 @@
 package com.firstfantasy.datos;
 
 public class Arma extends Objeto {
-   private int dañoPorGolpe;
-   private String tipo;
+    
+    private String tipoArma;
+    private int[] estadisticas;
 
-    public Arma(int dañoPorGolpe, int id, String nombre, String tipo) {
-        super(id, nombre);
-        this.dañoPorGolpe = dañoPorGolpe;
-        this.tipo = tipo;
+    public Arma(int identificador, String nombre, String tipo, String tipoArma, int valorModificadorAtaque, int valorModificadorAtaqueEspecial) {
+        super(identificador, nombre, "Arma");
+        this.tipoArma = tipoArma;
+        this.estadisticas = new int[]{valorModificadorAtaque, valorModificadorAtaqueEspecial};
+    }
+
+    public String getTipoArma() {
+        return tipoArma;
+    }
+
+    public void setTipoArma(String tipoArma) {
+        this.tipoArma = tipoArma;
+    }
+
+    public int getValorModificadorAtaque() {
+        
+        return estadisticas[0];
+        
+    }
+    
+    public void setValorModificadorAtaque(int valorModificadorAtaque) {
+        
+        this.estadisticas[0] = valorModificadorAtaque;
+        
+    }
+    
+    public int getValorModificadorAtaqueEspecial() {
+        
+        return estadisticas[1];
+        
+    }
+    
+    public void setValorModificadorAtaqueEspecial(int valorModificadorAtaqueEspecial) {
+        
+        this.estadisticas[1] = valorModificadorAtaqueEspecial;
+        
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (Daño por golpe: " + dañoPorGolpe + ", Tipo: " + tipo + ")";
+        return super.toString() + " - Arma{" + "tipoArma=" + tipoArma + ", valorModificadorAtaque=" + estadisticas[0] + ", valorModificadorAtaqueEspecial=" + estadisticas[1] + '}';
     }
-
     
-    
-    
-    
-    /**
-     * @return the dañoPorGolpe
-     */
-    public int getDañoPorGolpe() {
-        return dañoPorGolpe;
-    }
-
-    /**
-     * @param dañoPorGolpe the dañoPorGolpe to set
-     */
-    public void setDañoPorGolpe(int dañoPorGolpe) {
-        this.dañoPorGolpe = dañoPorGolpe;
-    }
-
-    /**
-     * @return the tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 }
