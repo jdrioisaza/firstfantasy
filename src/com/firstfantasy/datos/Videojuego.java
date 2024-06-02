@@ -1,5 +1,14 @@
 package com.firstfantasy.datos;
 
+import com.firstfantasy.personajes.Habilidad;
+import com.firstfantasy.personajes.Raza;
+import com.firstfantasy.personajes.Clase;
+import com.firstfantasy.personajes.Heroe;
+import com.firstfantasy.personajes.Personaje;
+import com.firstfantasy.personajes.Enemigo;
+import com.firstfantasy.objetos.Pocion;
+import com.firstfantasy.objetos.Arma;
+import com.firstfantasy.objetos.Objeto;
 import java.util.ArrayList;
 
 public class Videojuego {

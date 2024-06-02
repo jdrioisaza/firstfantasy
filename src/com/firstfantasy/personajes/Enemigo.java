@@ -1,5 +1,7 @@
-package com.firstfantasy.datos;
+package com.firstfantasy.personajes;
 
+import com.firstfantasy.objetos.Pocion;
+import com.firstfantasy.objetos.Arma;
 import java.util.ArrayList;
 
 public class Enemigo extends Personaje {

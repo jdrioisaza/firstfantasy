@@ -1,5 +1,7 @@
 package com.firstfantasy.datos;
 
+import com.firstfantasy.personajes.Personaje;
+import com.firstfantasy.personajes.Enemigo;
 import java.util.ArrayList;
 
 public class Combate {

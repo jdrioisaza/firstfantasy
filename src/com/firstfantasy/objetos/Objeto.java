@@ -1,4 +1,4 @@
-package com.firstfantasy.datos;
+package com.firstfantasy.objetos;
 
 public abstract class Objeto {
     

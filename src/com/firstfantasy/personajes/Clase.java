@@ -1,4 +1,6 @@
-package com.firstfantasy.datos;
+package com.firstfantasy.personajes;
+
+import com.firstfantasy.objetos.Arma;
 
 public class Clase {
     
