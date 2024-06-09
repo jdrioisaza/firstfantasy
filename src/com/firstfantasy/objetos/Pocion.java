@@ -6,6 +6,11 @@ public class Pocion extends Objeto {
 
     public Pocion(int identificador, String nombre, int valorModificadorVida, int valorModificadorEnergia, int valorModificadorAtaque, int valorModificadorAtaqueEspecial, int valorModificadorDefensa, int valorModificadorDefensaEspecial) {
         super(identificador, nombre, "Poción");
+        if (valorModificadorVida < 0 || valorModificadorEnergia < 0 || valorModificadorAtaque < 0 || valorModificadorAtaqueEspecial < 0 || valorModificadorDefensa < 0 || valorModificadorDefensaEspecial < 0) {
+            
+            throw new IllegalArgumentException("Los modificadores de los efectos de la poción no pueden ser negativos");
+            
+        }
         this.efectos = new int[]{valorModificadorVida, valorModificadorEnergia, valorModificadorAtaque, valorModificadorAtaqueEspecial, valorModificadorDefensa, valorModificadorDefensaEspecial};
     }
 

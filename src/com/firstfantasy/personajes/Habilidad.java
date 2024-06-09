@@ -12,7 +12,17 @@ public class Habilidad {
         this.identificador = identificador;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        if (costoEnergia < 0) {
+            
+            throw new IllegalArgumentException("No puede tener un costo de energia negativo");
+            
+        }
         this.costoEnergia = costoEnergia;
+        if (valorModificadorVida < 0 || valorModificadorEnergia < 0 || valorModificadorAtaque < 0 || valorModificadorAtaqueEspecial < 0 || valorModificadorDefensa < 0 || valorModificadorDefensaEspecial < 0) {
+            
+            throw new IllegalArgumentException("Los modificadores de los efectos de la habilidad no pueden ser negativos");
+            
+        }
         this.efectos = new int[]{valorModificadorVida, valorModificadorEnergia, valorModificadorAtaque, valorModificadorAtaqueEspecial, valorModificadorDefensa, valorModificadorDefensaEspecial};
     }
 

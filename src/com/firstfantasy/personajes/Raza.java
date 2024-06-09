@@ -10,6 +10,11 @@ public class Raza {
         this.identificador = identificador;
         this.nombre = nombre;
         //this.estadisticas = new float[]{MultiplicadorDaño, MultiplicadorDañoEspecial, MultiplicadorDefensa, MultiplicadorDefensaEspecial, MultiplicadorVampirismo, MultiplicadorLetalidad};
+        if (multiplicadorDaño < 0 || multiplicadorDañoEspecial < 0 || multiplicadorDefensa < 0 || multiplicadorDefensaEspecial < 0) {
+            
+            throw new IllegalArgumentException("Los multiplicadores de las estadísticas de la raza no pueden ser negativos");
+            
+        }
         this.estadisticas = new float[]{multiplicadorDaño, multiplicadorDañoEspecial, multiplicadorDefensa, multiplicadorDefensaEspecial};
     }
 

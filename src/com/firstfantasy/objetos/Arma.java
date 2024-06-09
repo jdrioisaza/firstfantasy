@@ -8,6 +8,11 @@ public class Arma extends Objeto {
     public Arma(int identificador, String nombre, String tipo, String tipoArma, int valorModificadorAtaque, int valorModificadorAtaqueEspecial) {
         super(identificador, nombre, "Arma");
         this.tipoArma = tipoArma;
+        if (valorModificadorAtaque < 0 || valorModificadorAtaqueEspecial < 0) {
+            
+            throw new IllegalArgumentException("Los modificadores de las estadísticas del arma no pueden ser negativos");
+            
+        }
         this.estadisticas = new int[]{valorModificadorAtaque, valorModificadorAtaqueEspecial};
     }
 

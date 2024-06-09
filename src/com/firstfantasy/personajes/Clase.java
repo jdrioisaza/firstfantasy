@@ -11,13 +11,18 @@ public class Clase {
     private float multiplicadorDañoEspecialTipoArmaPreferida;
     private float[] estadisticas;
 
-    public Clase(int identificador, String nombre, String tipoArmaPreferida, float multiplicadorDañoTipoArmaPreferida, float multiplicadorDañoEspecialTipoArmaPreferida, float MultiplicadorDaño, float MultiplicadorDañoEspecial, float MultiplicadorDefensa, float MultiplicadorDefensaEspecial) {
+    public Clase(int identificador, String nombre, String tipoArmaPreferida, float multiplicadorDañoTipoArmaPreferida, float multiplicadorDañoEspecialTipoArmaPreferida, float multiplicadorDaño, float multiplicadorDañoEspecial, float multiplicadorDefensa, float multiplicadorDefensaEspecial) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.tipoArmaPreferida = tipoArmaPreferida;
+        if (multiplicadorDañoTipoArmaPreferida < 0 || multiplicadorDañoEspecialTipoArmaPreferida < 0 || multiplicadorDaño < 0 || multiplicadorDañoEspecial < 0 || multiplicadorDefensa < 0 || multiplicadorDefensaEspecial < 0) {
+            
+            throw new IllegalArgumentException("Los multiplicadores de las estadísticas de la clase no pueden ser negativos");
+            
+        }
         this.multiplicadorDañoTipoArmaPreferida = multiplicadorDañoTipoArmaPreferida;
         this.multiplicadorDañoEspecialTipoArmaPreferida = multiplicadorDañoEspecialTipoArmaPreferida;
-        this.estadisticas = new float[]{MultiplicadorDaño, MultiplicadorDañoEspecial, MultiplicadorDefensa, MultiplicadorDefensaEspecial};
+        this.estadisticas = new float[]{multiplicadorDaño, multiplicadorDañoEspecial, multiplicadorDefensa, multiplicadorDefensaEspecial};
     }
 
     public int getIdentificador() {
@@ -66,9 +71,9 @@ public class Clase {
         
     }
     
-    public void setMultiplicadorDaño(float MultiplicadorDaño) {
+    public void setMultiplicadorDaño(float multiplicadorDaño) {
         
-        this.estadisticas[0] = MultiplicadorDaño;
+        this.estadisticas[0] = multiplicadorDaño;
         
     }
     
@@ -78,9 +83,9 @@ public class Clase {
         
     }
     
-    public void setMultiplicadorDañoEspecial(float MultiplicadorDañoEspecial) {
+    public void setMultiplicadorDañoEspecial(float multiplicadorDañoEspecial) {
         
-        this.estadisticas[1] = MultiplicadorDañoEspecial;
+        this.estadisticas[1] = multiplicadorDañoEspecial;
         
     }
     
@@ -90,9 +95,9 @@ public class Clase {
         
     }
     
-    public void setMultiplicadorDefensa(float MultiplicadorDefensa) {
+    public void setMultiplicadorDefensa(float multiplicadorDefensa) {
         
-        this.estadisticas[2] = MultiplicadorDefensa;
+        this.estadisticas[2] = multiplicadorDefensa;
         
     }
     
@@ -102,9 +107,9 @@ public class Clase {
         
     }
     
-    public void setMultiplicadorDefensaEspecial(float MultiplicadorDefensaEspecial) {
+    public void setMultiplicadorDefensaEspecial(float multiplicadorDefensaEspecial) {
         
-        this.estadisticas[3] = MultiplicadorDefensaEspecial;
+        this.estadisticas[3] = multiplicadorDefensaEspecial;
         
     }
 
@@ -117,7 +122,7 @@ public class Clase {
         
         if (arma.getTipoArma().equals(tipoArmaPreferida)) {
             
-            return new float[]{multiplicadorDañoTipoArmaPreferida * arma.getValorModificadorAtaque(), multiplicadorDañoEspecialTipoArmaPreferida, arma.getValorModificadorAtaqueEspecial()};
+            return new float[]{multiplicadorDañoTipoArmaPreferida * arma.getValorModificadorAtaque(), multiplicadorDañoEspecialTipoArmaPreferida * arma.getValorModificadorAtaqueEspecial()};
             
         }
         
