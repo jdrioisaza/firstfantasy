@@ -9,9 +9,10 @@ import com.firstfantasy.personajes.Enemigo;
 import com.firstfantasy.objetos.Pocion;
 import com.firstfantasy.objetos.Arma;
 import com.firstfantasy.objetos.Objeto;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Videojuego {
+public class Videojuego implements Serializable {
     
     private String nombre;
     private ArrayList<Combate> combates;
