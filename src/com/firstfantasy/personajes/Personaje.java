@@ -18,7 +18,9 @@ public abstract class Personaje {
     private ArrayList<Habilidad> habilidades;
     private Inventario inventario;
 
-    public Personaje(int identificador, String nombre, int vida, int energia, int atributoAtaque, int atributoAtaqueEspecial, int atributoDefensa, int atributoDefensaEspecial, Raza raza, Clase clase, Arma armaEquipada, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones) {
+    private String tipo;
+
+    public Personaje(int identificador, String nombre, int vida, int energia, int atributoAtaque, int atributoAtaqueEspecial, int atributoDefensa, int atributoDefensaEspecial, Raza raza, Clase clase, Arma armaEquipada, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones, String tipo) {
         this.identificador = identificador;
         this.nombre = nombre;
         if (vida < 0 || energia < 0 || atributoAtaque < 0 || atributoAtaqueEspecial < 0 || atributoDefensa < 0 || atributoDefensaEspecial < 0) {
@@ -32,6 +34,7 @@ public abstract class Personaje {
         this.armaEquipada = armaEquipada;
         this.habilidades = habilidades;
         this.inventario = new Inventario(armas, pociones);
+        this.tipo=tipo;
     }
 
     public void atacarFisicamente(Personaje objetivo) {
