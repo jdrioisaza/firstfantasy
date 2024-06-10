@@ -6,6 +6,7 @@ import com.firstfantasy.excepciones.PotionNotFoundException;
 import com.firstfantasy.objetos.Pocion;
 import com.firstfantasy.objetos.Arma;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Personaje {
 
@@ -20,7 +21,7 @@ public abstract class Personaje {
 
     private String tipo;
 
-    public Personaje(int identificador, String nombre, int vida, int energia, int atributoAtaque, int atributoAtaqueEspecial, int atributoDefensa, int atributoDefensaEspecial, Raza raza, Clase clase, Arma armaEquipada, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones, String tipo) {
+    public Personaje(int identificador, String nombre, int vida, int energia, int atributoAtaque, int atributoAtaqueEspecial, int atributoDefensa, int atributoDefensaEspecial, Raza raza, Clase clase, Arma armaEquipada, ArrayList<Habilidad> habilidades, ArrayList<Arma> armas, ArrayList<Pocion> pociones) {
         this.identificador = identificador;
         this.nombre = nombre;
         if (vida < 0 || energia < 0 || atributoAtaque < 0 || atributoAtaqueEspecial < 0 || atributoDefensa < 0 || atributoDefensaEspecial < 0) {
@@ -34,7 +35,6 @@ public abstract class Personaje {
         this.armaEquipada = armaEquipada;
         this.habilidades = habilidades;
         this.inventario = new Inventario(armas, pociones);
-        this.tipo=tipo;
     }
 
     public void atacarFisicamente(Personaje objetivo) {
@@ -42,7 +42,22 @@ public abstract class Personaje {
         objetivo.recibirDañoFisico((int)(estadisticas[2] * raza.getMultiplicadorDaño() * clase.getMultiplicadorDaño() + armaEquipada.getValorModificadorAtaque() + clase.calcularBonificacionTipoArmaPreferida(armaEquipada)[0]));
         
     }
-    
+
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "identificador=" + identificador +
+                ", nombre='" + nombre + '\'' +
+                ", estadisticas=" + Arrays.toString(estadisticas) +
+                ", raza=" + raza +
+                ", clase=" + clase +
+                ", armaEquipada=" + armaEquipada +
+                ", habilidades=" + habilidades.toString() +
+                ", inventario=" + inventario +
+                ", tipo='" + tipo + '\'' +
+                '}';
+    }
+
     public void recibirDañoFisico(int daño) {
         
         reducirVida((estadisticas[4] - daño < 0) ? daño - estadisticas[4] : 0);
