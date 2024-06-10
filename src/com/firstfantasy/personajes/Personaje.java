@@ -211,5 +211,11 @@ public abstract class Personaje {
         throw new PotionNotFoundException("No existe ninguna poción con ese identificador");
         
     }
+    public String getTipo() {
+        return tipo;
+    }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
